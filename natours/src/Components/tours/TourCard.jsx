@@ -4,7 +4,7 @@ function TourCard({ tour }) {
       {/* Image Section */}
       <div className="relative h-72">
         <img
-          src={`http://localhost:3000/img/tours/${tour.imageCover}`}
+          src={`https://roamly-backend-brown.vercel.app/img/tours/${tour.imageCover}`}
           alt={tour.name}
           className="h-full w-full object-cover"
         />
