@@ -4,7 +4,7 @@ function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden">
         <img
-          src="/src/assets/img/hero.jpg"
+          src="/img/hero.jpg"
           alt="Adventure landscape"
           className="object-conatins h-full w-full scale-105 object-center blur-[2px]"
         />

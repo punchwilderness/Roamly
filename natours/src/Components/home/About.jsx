@@ -28,12 +28,12 @@ function About() {
         {/* Image Side */}
         <div className="relative h-[500px]">
           <img
-            src="/src/assets/img/about-1.jpg"
+            src="/img/about-1.jpg"
             className="absolute top-0 left-10 h-96 w-72 rounded-3xl object-cover shadow-xl"
           />
 
           <img
-            src="/src/assets/img/about-2.jpg"
+            src="/img/about-2.jpg"
             className="absolute right-10 bottom-0 h-96 w-72 rounded-3xl object-cover object-[35%_25%] shadow-xl"
           />
         </div>
