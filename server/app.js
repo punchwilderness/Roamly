@@ -5,6 +5,9 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const cors = require('cors');
+const path = require('path');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -15,8 +18,11 @@ const reviewRouter = require('./routes/reviewRoutes');
 const app = express();
 
 // 1) Global MiddleWares
-app.use(helmet());
-
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  }),
+);
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
@@ -52,8 +58,15 @@ app.use(
   }),
 );
 
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  }),
+);
+
 // Serving static files
-app.use(express.static(`${__dirname}/public`));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 // 3) Routes
 app.use('/api/v1/tours', tourRouter);
