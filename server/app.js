@@ -1,4 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
@@ -26,6 +28,19 @@ app.use(
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: './config.env' });
+}
+
+const DB = process.env.DATABASE.replace(
+  '<db_password>',
+  process.env.DB_PASSWORD,
+);
+
+mongoose.connect(DB).then(() => {
+  console.log('DB connection successful!');
+});
 
 const limiter = rateLimit({
   max: 70,
@@ -60,7 +75,10 @@ app.use(
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? process.env.FRONTEND_URL
+        : 'http://localhost:5173',
     credentials: true,
   }),
 );
