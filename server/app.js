@@ -19,6 +19,11 @@ const reviewRouter = require('./routes/reviewRoutes');
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:5173', // Vite dev server
+  process.env.FRONTEND_URL, // Your deployed frontend
+];
+
 // 1) Global MiddleWares
 app.use(
   helmet({
@@ -75,10 +80,14 @@ app.use(
 
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === 'production'
-        ? process.env.FRONTEND_URL
-        : 'http://localhost:5173',
+    origin(origin, callback) {
+      // Allow requests without an Origin header (Postman, curl, etc.)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   }),
 );
