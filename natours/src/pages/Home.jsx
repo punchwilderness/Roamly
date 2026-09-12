@@ -4,7 +4,8 @@ import FeaturedTours from '../Components/tours/FeaturedTours';
 import About from '../Components/home/About';
 import Stats from '../Components/home/Stats';
 import Testimonials from '../Components/home/Testimonials';
-// import Footer from '../Components/layout/Footer';
+import Footer from '../Components/layout/Footer';
+import Newsletter from '../Components/layout/Newsletter';
 
 function Home() {
   return (
@@ -15,7 +16,8 @@ function Home() {
       <About />
       <Stats />
       <Testimonials />
-      {/* <Footer /> */}
+      <Newsletter />
+      <Footer />
     </>
   );
 }

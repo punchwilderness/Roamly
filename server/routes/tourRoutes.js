@@ -24,6 +24,9 @@ router
     authController.restrictTo('admin', 'lead-guide'),
     tourController.createTour,
   );
+
+router.route('/slug/:slug').get(tourController.getTourBySlug);
+
 router
   .route('/:id')
   .get(tourController.getTour)
